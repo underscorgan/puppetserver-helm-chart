@@ -181,7 +181,7 @@ replicaset.apps/puppetserver-postgres-5479895bb9      1         1         1     
 replicaset.apps/puppetserver-puppetdb-8698789c7f      1         1         1       10m
 replicaset.apps/puppetserver-puppetserver-d99c99896   2         2         2       10m
 
-NAME                                                           REFERENCE                                                    TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
+NAME                                                          REFERENCE                              TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
 horizontalpodautoscaler.autoscaling/puppetserver-autoscaler   Deployment/puppetserver-puppetserver   65%/80%, 0%/80%   1         5         2          10m
 
 NAME                                                 COMPLETIONS   DURATION   AGE
