@@ -156,7 +156,7 @@ You can use `kubectl get` to view all of the installed components.
 
 ```console
 $ kubectl get --namespace puppetserver all -l release=puppetserver
-NAME                                                                  READY   STATUS      RESTARTS   AGE
+NAME                                            READY   STATUS      RESTARTS   AGE
 pod/puppetserver-postgres-5479895bb9-pblfd      1/1     Running     0          10m
 pod/puppetserver-puppetdb-8698789c7f-glzdf      1/1     Running     0          10m
 pod/puppetserver-puppetserver-d99c99896-99z4h   1/1     Running     0          10m
@@ -171,26 +171,26 @@ service/postgres   ClusterIP   10.96.197.10    <none>        5432/TCP           
 service/puppet     ClusterIP   10.96.128.168   <none>        8140/TCP            10m
 service/puppetdb   ClusterIP   10.96.114.113   <none>        8080/TCP,8081/TCP   10m
 
-NAME                                                              READY   UP-TO-DATE   AVAILABLE   AGE
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/puppetserver-postgres       1/1     1            1           10m
 deployment.apps/puppetserver-puppetdb       1/1     1            1           10m
 deployment.apps/puppetserver-puppetserver   2/2     2            2           10m
 
-NAME                                                                        DESIRED   CURRENT   READY   AGE
+NAME                                                  DESIRED   CURRENT   READY   AGE
 replicaset.apps/puppetserver-postgres-5479895bb9      1         1         1       10m
 replicaset.apps/puppetserver-puppetdb-8698789c7f      1         1         1       10m
 replicaset.apps/puppetserver-puppetserver-d99c99896   2         2         2       10m
 
-NAME                                                                                REFERENCE                                                    TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
+NAME                                                           REFERENCE                                                    TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
 horizontalpodautoscaler.autoscaling/puppetserver-autoscaler   Deployment/puppetserver-puppetserver   65%/80%, 0%/80%   1         5         2          10m
 
-NAME                                                                       COMPLETIONS   DURATION   AGE
+NAME                                                 COMPLETIONS   DURATION   AGE
 job.batch/puppetserver-r10k-code-deploy-1586100120   1/1           1s         6m3s
 job.batch/puppetserver-r10k-code-deploy-1586100240   1/1           2s         4m3s
 job.batch/puppetserver-r10k-code-deploy-1586100360   1/1           2s         2m3s
 job.batch/puppetserver-r10k-code-deploy-1586100480   1/1           2s         3s
 
-NAME                                                                SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+NAME                                          SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 cronjob.batch/puppetserver-r10k-code-deploy   */2 * * * *   False     1        3s              10m
 ```
 
