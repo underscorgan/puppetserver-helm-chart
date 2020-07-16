@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Fetch history
+        run: git fetch --prune --unshallow
       - uses: azure/setup-helm@v1
       - name: lint
         run: |
