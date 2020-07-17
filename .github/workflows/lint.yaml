@@ -24,6 +24,12 @@ jobs:
       - name: Package the chart
         run: |
           helm package . --destination .cr-release-packages --dependency-update
+      - name: Install chart releaser
+        run: |
+          version=v1.0.0-beta.1
+          curl -sSLo cr.tar.gz "https://github.com/helm/chart-releaser/releases/download/$version/chart-releaser_${version#v}_linux_amd64.tar.gz"
+          tar -xzf cr.tar.gz
+          sudo mv cr /usr/local/bin/cr
       - name: release the chart
         run: |
           cr upload -o "underscorgan" -r "puppetserver-helm-chart" -t "$GITHUB_TOKEN"
