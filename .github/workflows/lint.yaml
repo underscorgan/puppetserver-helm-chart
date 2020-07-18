@@ -43,6 +43,6 @@ jobs:
           pushd "$gh_pages_worktree" > /dev/null
           git add index.yaml
           git commit --message="Update index.yaml" --signoff
-          local repo_url="https://x-access-token:$GITHUB_TOKEN@github.com/underscorgan/puppetserver-helm-chart"
+          repo_url="https://x-access-token:$GITHUB_TOKEN@github.com/underscorgan/puppetserver-helm-chart"
           git push "$repo_url" gh-pages
           popd > /dev/null
