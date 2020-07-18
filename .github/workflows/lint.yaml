@@ -35,6 +35,7 @@ jobs:
       - name: release the chart
         run: |
           cr upload -o "underscorgan" -r "puppetserver-helm-chart" -t "$GITHUB_TOKEN"
+          mkdir .cr-index
           cr index -o "underscorgan" -r "puppetserver-helm-chart" -c "https://underscorgan.github.io/puppetserver-helm-chart" -t "$GITHUB_TOKEN"
           gh_pages_worktree=$(mktemp -d)
           git worktree add "$gh_pages_worktree" gh-pages
