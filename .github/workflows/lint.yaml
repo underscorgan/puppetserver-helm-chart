@@ -28,7 +28,8 @@ jobs:
           helm package . --destination .release-packages --dependency-update
           version=$(grep 'version:' Chart.yaml| awk '{print $2}')
           echo "::set-env name=VERSION::$version"
-          echo "version: $VERSION"
+      - name: what version
+        run: echo "version == $VERSION"
       - name: Make the release
         uses: actions/create-release@v1
         with:
