@@ -31,7 +31,7 @@ jobs:
       - name: Make the release
         uses: actions/create-release@v1
         with:
-          tag_name: $VERSION
+          tag_name: ${{ VERSION }}
           release_name: "this is a test"
           body: "this is the test of the body"
 
