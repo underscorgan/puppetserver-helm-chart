@@ -5,7 +5,7 @@ numbering uses [semantic versioning](http://semver.org).
 
 NOTE: The change log until version `v0.2.4` is auto-generated.
 
-## [v9.9.7](https://github.com/puppetlabs/puppetserver-helm-chart/tree/v4.2.1) (2020-07-08)
+## [v9.9.8](https://github.com/puppetlabs/puppetserver-helm-chart/tree/v4.2.1) (2020-07-08)
 
 - Add Helm v2 backward compatibility.
 - Update README to reflect Helm v2 backward compatibility.
