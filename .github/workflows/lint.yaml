@@ -9,6 +9,7 @@ jobs:
   lint-and-publish:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      VERSION: ${{
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,24 +26,11 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Package the chart
         run: |
-          helm package . --destination .cr-release-packages --dependency-update
-      - name: Install chart releaser
-        run: |
-          version=v1.0.0-beta.1
-          curl -sSLo cr.tar.gz "https://github.com/helm/chart-releaser/releases/download/$version/chart-releaser_${version#v}_linux_amd64.tar.gz"
-          tar -xzf cr.tar.gz
-          sudo mv cr /usr/local/bin/cr
-      - name: release the chart
-        run: |
-          cr upload -o "underscorgan" -r "puppetserver-helm-chart" -t "$GITHUB_TOKEN"
-          mkdir .cr-index
-          cr index -o "underscorgan" -r "puppetserver-helm-chart" -c "https://underscorgan.github.io/puppetserver-helm-chart" -t "$GITHUB_TOKEN"
-          gh_pages_worktree=$(mktemp -d)
-          git worktree add "$gh_pages_worktree" gh-pages
-          cp --force .cr-index/index.yaml "$gh_pages_worktree/index.yaml"
-          pushd "$gh_pages_worktree" > /dev/null
-          git add index.yaml
-          git commit --message="Update index.yaml" --signoff
-          repo_url="https://x-access-token:$GITHUB_TOKEN@github.com/underscorgan/puppetserver-helm-chart"
-          git push "$repo_url" gh-pages
-          popd > /dev/null
+          helm package . --destination .release-packages --dependency-update
+      - name: Make the release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ grep version: Chart.yaml| awk '{print $2}' }}
+          release_name: "this is a test"
+          body: "this is the test of the body"
+
