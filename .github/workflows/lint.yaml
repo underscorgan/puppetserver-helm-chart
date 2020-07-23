@@ -26,14 +26,13 @@ jobs:
       - name: Package the chart
         run: |
           helm package . --destination .release-packages --dependency-update
-          version=$(grep 'version:' Chart.yaml| awk '{print $2}')
-          echo "::set-env name=VERSION::$version"
+          echo "::set-env name=version::$(grep 'version:' Chart.yaml| awk '{print $2}')"
       - name: what version
-        run: echo "version == $VERSION"
+        run: echo "version == $version"
       - name: Make the release
         uses: actions/create-release@v1
         with:
-          tag_name: "$VERSION"
+          tag_name: ${{ env.version }}
           release_name: "this is a test"
           body: "this is the test of the body"
 
