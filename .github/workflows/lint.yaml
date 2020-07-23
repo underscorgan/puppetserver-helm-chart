@@ -30,9 +30,17 @@ jobs:
       - name: what version
         run: echo "version == $version"
       - name: Make the release
+        id: create_release
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.version }}
           release_name: "this is a test"
           body: "this is the test of the body"
-
+      - name: upload release artifacts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./.release-packages/*.tgz
+          asset_content_type: application/gzip
