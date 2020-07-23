@@ -17,25 +17,25 @@ jobs:
       - uses: azure/setup-helm@v1
       - name: lint
         run: |
-          helm version
           helm lint .
       - name: Configure Git
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          echo "::set-env name=version::$(grep 'version:' Chart.yaml| awk '{print $2}')"
       - name: Package the chart
         run: |
           helm package . --destination .release-packages --dependency-update
-          echo "::set-env name=version::$(grep 'version:' Chart.yaml| awk '{print $2}')"
-      - name: what version
-        run: echo "version == $version"
+          release_notes=`sed -n '/^## \[${{ env.version }}\]/,/^## /p' CHANGELOG.md | sed -n '/^- /p'`
+          echo $release_notes > body.md
+          echo "::set-env name=release_name::$(echo $release_notes| head -1 | sed 's/^- //')"
       - name: Make the release
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ env.version }}
-          release_name: "this is a test"
-          body: "this is the test of the body"
+          tag_name: v${{ env.version }}
+          release_name: ${{ env.release_name }}
+          body_path: body.md
       - name: upload release artifacts
         uses: actions/upload-release-asset@v1
         env:
