@@ -26,7 +26,8 @@ jobs:
       - name: Package the chart
         run: |
           helm package . --destination .release-packages --dependency-update
-          release_notes=`sed -n '/^## \[${{ env.version }}\]/,/^## /p' CHANGELOG.md | sed -n '/^- /p'`
+          release_notes=`sed -n '/^## \['${{ env.version }}'\]/,/^## /p' CHANGELOG.md | sed -n '/^- /p'`
+          echo "RELEASE NOTES: $release_notes"
           echo $release_notes > body.md
           echo "::set-env name=release_name::$(echo $release_notes| head -1 | sed 's/^- //')"
       - name: Make the release
