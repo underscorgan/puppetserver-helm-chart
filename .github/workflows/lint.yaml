@@ -9,7 +9,6 @@ jobs:
   lint-and-publish:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      VERSION: ${{
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,10 +26,11 @@ jobs:
       - name: Package the chart
         run: |
           helm package . --destination .release-packages --dependency-update
+          export version=$(grep 'version:' Chart.yaml| awk '{print $2}')
       - name: Make the release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ grep version: Chart.yaml| awk '{print $2}' }}
+          tag_name: "$version"
           release_name: "this is a test"
           body: "this is the test of the body"
 
