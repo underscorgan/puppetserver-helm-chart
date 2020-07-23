@@ -5,6 +5,14 @@ numbering uses [semantic versioning](http://semver.org).
 
 NOTE: The change log until version `v0.2.4` is auto-generated.
 
+## [v9.9.6](https://github.com/puppetlabs/puppetserver-helm-chart/tree/v4.2.1) (2020-07-08)
+
+- Add Helm v2 backward compatibility.
+- Update README to reflect Helm v2 backward compatibility.
+- Improve post-deployment NOTES to show recommended Puppet Server Masters K8s Service name.
+
+[Full Changelog](https://github.com/puppetlabs/puppetserver-helm-chart/compare/v4.1.1...v4.2.0)
+
 ## [v4.2.1](https://github.com/puppetlabs/puppetserver-helm-chart/tree/v4.2.1) (2020-07-08)
 
 - Fix naming for Puppet Server Masters' Ingress.
