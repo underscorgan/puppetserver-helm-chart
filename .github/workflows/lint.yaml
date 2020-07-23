@@ -29,7 +29,8 @@ jobs:
           release_notes=`sed -n '/^## \['v${{ env.version }}'\]/,/^## /p' CHANGELOG.md | sed -n '/^- /p'`
           echo "RELEASE NOTES: $release_notes"
           echo $release_notes > body.md
-          echo "::set-env name=release_name::$(echo $release_notes| head -1 | sed 's/^- //')"
+          release_name=`echo $release_notes| head -1 | sed 's/^- //'`
+          echo "::set-env name=release_name::$release_name"
       - name: Make the release
         id: create_release
         uses: actions/create-release@v1
